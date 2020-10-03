@@ -23,7 +23,7 @@ class D2 : public Base<double> // Base<double> is non-dependent base
 
 void g(D2<int *> &d2, int* p)
 {
-    d2.strange = p; //a value of type "int *" cannot be assigned to an entity of type "int"
+    // d2.strange = p; // ERROR: a value of type "int *" cannot be assigned to an entity of type "int"
 }
 
 int main()

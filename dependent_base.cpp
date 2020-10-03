@@ -25,9 +25,9 @@ public:
     };
 };
 
-void g(DD<bool> &d)
+void g(DD<bool> &d) // with specialization, basefield is an enum constant, thus can't be re-assigned in f()
 {
-    d.f();
+    // d.f(); // '=': cannot convert from 'int' to 'Base<bool>::<unnamed-enum-basefield>' 
 }
 
 int main()

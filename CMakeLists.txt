@@ -21,7 +21,10 @@ target_include_directories(tutorial_compiler_flags
 add_executable(using using.cpp)
 add_executable(nondependent_base nondependent_base.cpp)
 add_executable(dependent_base dependent_base.cpp)
+add_executable(type_classification type_classification.cpp)
+
 
 target_link_libraries(using PUBLIC tutorial_compiler_flags)
 target_link_libraries(nondependent_base PUBLIC tutorial_compiler_flags)
 target_link_libraries(dependent_base PUBLIC tutorial_compiler_flags)
+target_link_libraries(type_classification PUBLIC tutorial_compiler_flags)
