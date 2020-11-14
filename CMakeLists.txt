@@ -21,10 +21,12 @@ target_include_directories(tutorial_compiler_flags
 add_executable(using using.cpp)
 add_executable(nondependent_base nondependent_base.cpp)
 add_executable(dependent_base dependent_base.cpp)
-add_executable(type_classification type_classification.cpp)
+add_executable(compound_type compound_type.cpp)
+add_executable(static_check static_check.cpp)
 
 
 target_link_libraries(using PUBLIC tutorial_compiler_flags)
 target_link_libraries(nondependent_base PUBLIC tutorial_compiler_flags)
 target_link_libraries(dependent_base PUBLIC tutorial_compiler_flags)
-target_link_libraries(type_classification PUBLIC tutorial_compiler_flags)
+target_link_libraries(compound_type PUBLIC tutorial_compiler_flags)
+target_link_libraries(static_check PUBLIC tutorial_compiler_flags)

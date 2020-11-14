@@ -32,6 +32,8 @@ void g(DD<bool> &d) // with specialization, basefield is an enum constant, thus 
 
 int main()
 {
-    
+    // auto&& a = DD<bool>();
+    // g(a);
+
 }
 
