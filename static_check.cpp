@@ -20,7 +20,7 @@ struct CompileTimeChecker<false> {}; // default ctor doesn't take any argument
 
 void main()
 {
-    STATIC_CHECK(true, VOID_PTR_NOT_EQUAL_CHAR) ;
+    // STATIC_CHECK(sizeof(int) == sizeof(int), VOID_PTR_NOT_EQUAL_CHAR);
 }
 
 
