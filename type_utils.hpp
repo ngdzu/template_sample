@@ -7,7 +7,7 @@ template <int N>
 struct Int2Type
 {
     enum {
-        value = N;
+        value = N
     };
 };
 

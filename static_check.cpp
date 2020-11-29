@@ -35,6 +35,8 @@ int main()
     double b = 1.0;
     auto d = safe_reinterpret_cast<int*>(&b);
 
+    
+
     return 0;
 }
 

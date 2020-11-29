@@ -29,21 +29,28 @@ Field(GenScatterHierarchy<TL, Unit>& obj)
 }
 
 
+template <typename TL, template<class> typename Unit>
+Unit<typename TL::Head>&
+Field_Helper(GenScatterHierarchy<TL, Unit>& obj, Int2Type<0>)
+{
+    GenScatterHierarchy<typename TL::Head, Unit>& temp = obj;
+    return Field<typename TL::Head>(temp);
+}
+
+template <int i, typename TL, template<class> typename Unit>
+Unit<typename TypeAt<TL,i>::Result>&
+Field_Helper(GenScatterHierarchy<TL, Unit>& obj, Int2Type<i>)
+{
+    GenScatterHierarchy<typename TL::Tail, Unit>& temp = obj;
+    return Field_Helper(temp, Int2Type<i-1>());
+}
+
+
 template<int i, typename TL, template<class> typename Unit>
 Unit<typename TypeAt<TL,i>::Result>&
-// auto &
 Field(GenScatterHierarchy<TL, Unit>& obj)
 {
-    if constexpr (i == 0)
-    {
-        Field<typename TL::Head>& temp = obj;
-        return temp;
-    }
-    else
-    {
-        auto& temp = Field<i-1>(obj);
-        return temp;
-    }
+    return Field_Helper<i>(obj, Int2Type<i>());
 }
 
 

@@ -1,5 +1,6 @@
 
-
+#include <type_traits>
+#include <cassert>
 #include "type_list.hpp"
 #include "GenScatterHierarchy.hpp"
 #include "type_utils.hpp"
@@ -50,10 +51,16 @@ int main()
     static_assert(IndexOf<int_type_plus_double, double>::value == 4);
 
     WidgetInfo obj;
-    Field<int>(obj).value_ = 3;
+    Field<short>(obj).value_ = 3;
 
     Field<2>(obj).value_ = 4;
 
+    {
+        const int a = Field<short>(obj).value_;
+        const int b = Field<2>(obj).value_;
+        assert(a==3);
+        assert(b==4);
+    }
 
     return 0;
 }

@@ -31,6 +31,9 @@ struct type_list<T, NullType>
 #define TYPE_LIST_4(T1, T2, T3, T4) \
     type_list<T1, TYPE_LIST_3(T2, T3, T4)>
 
+#define TYPE_LIST_5(T1, T2, T3, T4, T5) \
+    type_list<T1, TYPE_LIST_4(T2, T3, T4, T5)>
+
 // append
 template <typename TL, typename T>
 struct Append;
