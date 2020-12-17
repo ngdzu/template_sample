@@ -5,6 +5,8 @@
 #include "GenScatterHierarchy.hpp"
 #include "type_utils.hpp"
 
+#include <iostream>
+
 template <typename T>
 struct Holder
 {
@@ -56,11 +58,18 @@ int main()
     Field<2>(obj).value_ = 4;
 
     {
-        const int a = Field<short>(obj).value_;
-        const int b = Field<2>(obj).value_;
-        assert(a==3);
-        assert(b==4);
+        int a = Field<short>(obj).value_;
+        int b = Field<2>(obj).value_;
+        assert(a == 3);
+        assert(b == 4);
     }
+
+    using MyType = TYPE_LIST_4(int, float, double, int);
+    using MyTypeNoDup = typename NoDuplicates<MyType>::Result;
+    using NoDupType = TYPE_LIST_3(int, float, double);
+    static_assert(std::is_same_v<MyTypeNoDup, NoDupType>);
+
+    std::cout << "hello world" << std::endl;
 
     return 0;
 }

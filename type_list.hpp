@@ -44,6 +44,11 @@ struct Append<NullType, NullType>
     using Result = NullType;
 };
 
+template<typename T>
+struct Append<NullType, T>
+{
+    using Result = TYPE_LIST_1(T);
+};
 
 template <typename T, typename U>
 struct Append<type_list<T, NullType>, U>
@@ -141,5 +146,75 @@ struct IndexOf<type_list<Head, Tail>, T>
         value = (temp == -1)? -1 : 1 + temp // if not found (-1), it is not found, don't add to the calculation
     };
 };
+
+template<typename TL, typename T>
+struct Erase;
+
+template<typename T>
+struct Erase <NullType, T>
+{
+    using Result = NullType;
+};
+
+template<typename T>
+struct Erase<type_list<T, NullType>, T>
+{
+    using Result = NullType;
+};
+
+template<typename T, typename U>
+struct Erase<type_list<T, U>, T>
+{
+    using Result = T;
+};
+
+template<typename T, typename U, typename X>
+struct Erase<type_list<T, U>, X>
+{
+    using Result = type_list<T, typename Erase<U, X>::Result>;
+};
+
+template<typename T>
+struct NoDuplicates;
+
+template<>
+struct NoDuplicates<NullType>
+{
+    using Result = NullType;
+};
+
+template<typename Head, typename Tail>
+struct NoDuplicates<type_list<Head, Tail>>
+{
+private: 
+    using T1 = typename NoDuplicates<Tail>::Result;
+    using T2 = typename Erase<T1, Head>::Result;
+public:
+    using Result = type_list<Head, T2>;
+};
+
+template<typename TL, typename t, typename U>
+struct Replace;
+
+template<typename T, typename U>
+struct Replace<NullType, T, U>
+{
+    using Result = NullType;
+};
+
+template<typename Head, typename Tail, typename U>
+struct Replace<type_list<Head, Tail>, Head, U>
+{
+    using Result = type_list<U, Tail>;
+};
+
+template<typename Head, typename Tail, typename T, typename U>
+struct Replace<type_list<Head, Tail>, T, U>
+{
+    using Result = type_list<Head, typename Replace<Tail, T, U>::Result>;
+};
+
+
+
 
 
